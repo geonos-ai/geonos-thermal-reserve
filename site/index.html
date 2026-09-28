@@ -1,137 +1,165 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-US">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="GEONOS Thermal Reserve turns existing cold-chain telemetry into safe, verifiable grid flexibility. Interactive True Zero Global Prize prototype."
+      content="GEONOS is an early prototype for testing cold-storage peak-load plans against modeled storage-temperature limits."
     />
-    <meta property="og:title" content="GEONOS — Thermal Reserve" />
+    <meta property="og:title" content="GEONOS — Cold-storage peak planning" />
     <meta
       property="og:description"
-      content="A cold room is already a thermal battery. GEONOS proves how much load can move, for how long, without crossing the temperature line."
+      content="Test a proposed refrigeration load shift, review the modeled temperature limit, and plan a field pilot."
     />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#07120f" />
-    <title>GEONOS — Thermal Reserve</title>
+    <meta property="og:locale" content="en_US" />
+    <meta name="theme-color" content="#17382e" />
+    <title>GEONOS — Cold-storage peak management</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260928" />
-    <script src="./app.js?v=20260928" defer></script>
+    <link rel="stylesheet" href="./styles.css?v=20260928-9" />
+    <script src="./app.js?v=20260928-9" defer></script>
   </head>
   <body>
-    <a class="skip-link" href="#lab">Skip to the simulator</a>
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <header class="site-header">
-      <a class="brand" href="#top" aria-label="GEONOS home">
-        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
-          <path d="M4 8.5 16 2l12 6.5v15L16 30 4 23.5Z" />
-          <path d="m9 11 7-3.8 7 3.8v8l-7 3.8L9 19Z" />
-          <path d="M16 7.2v15.6M9 11l14 8M23 11 9 19" />
+    <header class="app-header">
+      <a class="brand" href="#overview" data-route="overview" aria-label="GEONOS overview">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M4 9 16 2l12 7v14l-12 7-12-7Z" />
+          <path d="m10 12 6-3.5 6 3.5v8l-6 3.5-6-3.5Z" />
         </svg>
         <span>GEONOS</span>
       </a>
-      <div class="header-meta">
-        <span class="status-dot" aria-hidden="true"></span>
-        True Zero 2026 prototype
-      </div>
-      <a class="header-link" href="#pilot">Pilot brief <span aria-hidden="true">↗</span></a>
+
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav">
+        Menu
+      </button>
+
+      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <a href="#overview" data-route="overview" class="active">Overview</a>
+        <a href="#simulator" data-route="simulator">Simulator</a>
+        <a href="#method" data-route="method">How it works</a>
+        <a href="#pilot" data-route="pilot">Pilot</a>
+        <a href="#company" data-route="company">Company</a>
+      </nav>
+
+      <span class="header-context">True Zero Global Prize · 2026</span>
     </header>
 
-    <main id="top">
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <p class="eyebrow"><span>01</span> Sustainable cooling × grid flexibility</p>
-          <h1 id="hero-title">
-            A cold room is already a
-            <span class="accent-line">thermal battery.</span>
-          </h1>
-          <p class="hero-lede">
-            GEONOS proves how much refrigeration load can move, for how long,
-            without crossing the temperature line.
-          </p>
-          <div class="hero-actions">
-            <button class="button button-primary" data-run-demo>
-              Run the Antalya dispatch
-              <span aria-hidden="true">→</span>
-            </button>
-            <a class="button button-quiet" href="#how-it-works">See the proof layer</a>
+    <main id="main-content">
+      <section class="view overview-view" id="overview" data-view="overview" aria-labelledby="overview-title">
+        <div class="overview-grid">
+          <div class="overview-copy">
+            <p class="section-label">Cold-storage peak management</p>
+            <h1 id="overview-title">Test the peak plan before changing operations.</h1>
+            <p class="lead">
+              GEONOS helps cold-storage operators test when refrigeration load might move away from
+              selected peak hours, with a modeled storage-temperature limit guiding the decision.
+            </p>
+            <div class="actions">
+              <a class="button primary" href="#simulator" data-route="simulator">Try the model</a>
+              <a class="text-link" href="#method" data-route="method">See how it works <span aria-hidden="true">→</span></a>
+            </div>
           </div>
-          <ul class="signal-list" aria-label="Product principles">
-            <li><span>01</span> Existing telemetry first</li>
-            <li><span>02</span> Temperature is a hard gate</li>
-            <li><span>03</span> Every dispatch is measured</li>
-          </ul>
+
+          <aside class="day-plan" aria-label="Example dispatch plan">
+            <div class="card-heading">
+              <div>
+                <span>Example planning screen</span>
+                <strong>Antalya demo cold store</strong>
+              </div>
+              <span class="status-chip">MODELED</span>
+            </div>
+
+            <div class="day-chart" aria-hidden="true">
+              <div class="time-axis"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
+              <svg viewBox="0 0 560 190">
+                <rect x="376" y="16" width="72" height="144" class="peak-window" />
+                <path class="baseline-preview" d="M16 128 C74 132 112 123 152 112 S226 89 280 84 S349 62 406 57 S492 85 544 111" />
+                <path class="plan-preview" d="M16 128 C74 132 112 123 152 112 S226 89 280 84 S342 48 376 45 L392 104 L408 112 L424 109 L448 69 S494 91 544 111" />
+              </svg>
+              <span class="peak-label">PEAK · 16–19</span>
+            </div>
+
+            <dl class="plan-metrics">
+              <div><dt>Modeled reduction</dt><dd><span id="previewCapacity">171</span> kW</dd></div>
+              <div><dt>Event length</dt><dd><span id="previewDuration">3.0</span> h</dd></div>
+              <div><dt>Temperature check</dt><dd class="safe-text" id="previewSafety">Within limit</dd></div>
+            </dl>
+
+            <p class="card-footnote">Example only. A real plan needs site data and operator approval.</p>
+          </aside>
         </div>
 
-        <div class="hero-visual" aria-label="Diagram of a cold room providing safe grid flexibility">
-          <div class="orbital-label label-grid">GRID SIGNAL <b>16:00–19:00</b></div>
-          <div class="orbital-label label-room">COLD ROOM <b>−18.0°C LIMIT</b></div>
-          <div class="orbital-label label-proof">PROOF PACKET <b>READY AFTER M&amp;V</b></div>
-          <div class="reserve-core">
-            <div class="core-rings" aria-hidden="true"></div>
-            <span class="core-kicker">AVAILABLE RESERVE</span>
-            <strong id="heroReserve">184</strong>
-            <span class="core-unit">kW · modeled</span>
-          </div>
-          <svg class="flow-lines" viewBox="0 0 660 560" aria-hidden="true">
-            <path d="M85 105 C205 90 236 192 292 238" />
-            <path d="M573 146 C462 155 433 208 383 248" />
-            <path d="M551 453 C445 424 418 357 380 323" />
-            <circle cx="85" cy="105" r="5" />
-            <circle cx="573" cy="146" r="5" />
-            <circle cx="551" cy="453" r="5" />
-          </svg>
-          <div class="hero-provenance">
-            <span>PUBLIC CLIMATE</span>
-            <span>DEMO ASSET</span>
-            <span>MODELED OUTPUT</span>
-          </div>
+        <div class="overview-details">
+          <article>
+            <span>01</span>
+            <h2>Start with what the site records</h2>
+            <p>Power, room temperature, compressor status, door activity and local weather.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h2>Review a practical plan</h2>
+            <p>Pre-cool before the peak, reduce load for a set period, then manage the rebound.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h2>Check an approved field test</h2>
+            <p>A field report would compare delivered peak reduction, temperature performance and uncertainty.</p>
+          </article>
+        </div>
+
+        <div class="stage-note">
+          <strong>Where we are now</strong>
+          <p>
+            This is a rule-based demonstration, not a live controller. We have not yet used customer
+            data or completed a field dispatch. The proposed pilot would test those steps under site-approved limits.
+          </p>
         </div>
       </section>
 
-      <section class="dispatch-lab" id="lab" aria-labelledby="lab-title">
-        <div class="lab-heading">
+      <section class="view simulator-view" id="simulator" data-view="simulator" aria-labelledby="simulator-title" hidden>
+        <div class="view-heading">
           <div>
-            <p class="eyebrow"><span>02</span> Interactive flexibility audit</p>
-            <h2 id="lab-title">Draw a safe dispatch window.</h2>
+            <p class="section-label">Planning simulator</p>
+            <h1 id="simulator-title">Test a peak window with a simple site model.</h1>
           </div>
           <p>
-            Change the heat, event and product constraints. The model rejects any plan
-            that crosses the storage limit—because grid value never outranks product safety.
+            Adjust the conditions below. If the requested load shift pushes the illustrative
+            storage-temperature proxy outside the selected range, the plan is rejected.
           </p>
         </div>
 
-        <div class="lab-shell">
-          <form class="control-panel" id="dispatchForm">
-            <div class="control-heading">
-              <span>ANTALYA · DEMO COLD STORE</span>
-              <span class="live-pill"><i></i> MODEL READY</span>
+        <div class="simulator-shell">
+          <form class="controls" id="dispatchForm">
+            <div class="control-title">
+              <strong>Planning inputs</strong>
+              <span>DEMO SITE</span>
             </div>
 
-            <label class="field">
+            <label>
               <span>Stored product</span>
               <select id="productType">
                 <option value="frozen">Frozen food · −24 to −18°C</option>
                 <option value="chilled">Chilled produce · 1 to 5°C</option>
-                <option value="pharma">Temperature-controlled · 2 to 8°C</option>
               </select>
             </label>
 
-            <label class="field">
+            <label>
               <span>Outdoor peak <output id="heatOutput">38°C</output></span>
               <input id="heatStress" type="range" min="30" max="44" value="38" step="1" />
-              <span class="range-scale"><i>30°C</i><i>44°C</i></span>
+              <small><i>30°C</i><i>44°C</i></small>
             </label>
 
-            <label class="field">
-              <span>Connected refrigeration load <output id="loadOutput">600 kW</output></span>
+            <label>
+              <span>Typical peak refrigeration load <output id="loadOutput">600 kW</output></span>
               <input id="connectedLoad" type="range" min="200" max="1400" value="600" step="50" />
-              <span class="range-scale"><i>200 kW</i><i>1.4 MW</i></span>
+              <small><i>200 kW</i><i>1.4 MW</i></small>
             </label>
 
-            <label class="field">
-              <span>Grid event</span>
+            <label>
+              <span>Peak window</span>
               <select id="eventWindow">
                 <option value="16-19">16:00–19:00 · 3 hours</option>
                 <option value="17-20">17:00–20:00 · 3 hours</option>
@@ -140,400 +168,297 @@
               </select>
             </label>
 
-            <label class="field">
-              <span>Requested curtailment <output id="curtailmentOutput">32%</output></span>
+            <label>
+              <span>Requested reduction <output id="curtailmentOutput">32%</output></span>
               <input id="curtailment" type="range" min="10" max="55" value="32" step="1" />
-              <span class="range-scale"><i>10%</i><i>55%</i></span>
+              <small><i>10%</i><i>55%</i></small>
             </label>
 
-            <button class="button button-primary button-wide" type="submit">
-              Test dispatch plan <span aria-hidden="true">→</span>
-            </button>
+            <button class="button primary wide" type="submit">Update plan</button>
           </form>
 
-          <div class="chart-panel">
-            <div class="chart-toolbar">
+          <div class="results">
+            <div class="result-heading">
               <div>
-                <span class="chart-overline">24-HOUR LOAD PROFILE</span>
-                <h3>Baseline vs. operator-approved plan</h3>
+                <span>24-hour refrigeration load</span>
+                <strong>Baseline and proposed plan</strong>
               </div>
               <div class="legend" aria-label="Chart legend">
-                <span><i class="legend-line baseline"></i>Baseline</span>
-                <span><i class="legend-line shifted"></i>Shifted</span>
-                <span><i class="legend-block"></i>Grid event</span>
+                <span><i class="key baseline"></i>Baseline</span>
+                <span><i class="key planned"></i>Plan</span>
+                <span><i class="key window"></i>Peak window</span>
               </div>
             </div>
 
             <div class="chart-wrap">
               <svg id="loadChart" viewBox="0 0 820 330" role="img" aria-labelledby="chartTitle chartDesc">
-                <title id="chartTitle">Refrigeration load before and after the modeled dispatch</title>
-                <desc id="chartDesc">A line chart showing pre-cooling before a grid event, reduced load during the event, and controlled recovery afterward.</desc>
+                <title id="chartTitle">Modeled refrigeration load before and after a proposed peak reduction</title>
+                <desc id="chartDesc">The plan pre-cools before the peak window, reduces load during the window, and recovers afterward.</desc>
                 <g id="chartGrid"></g>
                 <rect id="eventBand" class="event-band" x="0" y="26" width="0" height="252" />
                 <path id="baselineArea" class="baseline-area" d="" />
                 <path id="shiftedArea" class="shifted-area" d="" />
-                <path id="baselinePath" class="line line-baseline" d="" />
-                <path id="shiftedPath" class="line line-shifted" d="" />
+                <path id="baselinePath" class="chart-line baseline-line" d="" />
+                <path id="shiftedPath" class="chart-line planned-line" d="" />
                 <g id="chartLabels"></g>
               </svg>
-              <div class="event-label" id="eventLabel">GRID EVENT · 16:00–19:00</div>
+              <span class="event-label" id="eventLabel">PEAK WINDOW · 16:00–19:00</span>
             </div>
 
-            <div class="safety-strip" id="safetyStrip" role="status" aria-live="polite">
-              <div class="safety-icon" aria-hidden="true">✓</div>
+            <div class="safety-result" id="safetyStrip" role="status" aria-live="polite">
+              <span class="safety-icon" aria-hidden="true">✓</span>
               <div>
-                <span id="safetyLabel">PLAN WITHIN MODELED LIMIT</span>
-                <strong id="safetyDetail">Peak product temperature −18.9°C · 0 breaches</strong>
-              </div>
-              <div class="temp-track" aria-hidden="true">
-                <span id="tempFill"></span>
-                <i id="tempMarker"></i>
+                <strong id="safetyLabel">Plan stays within the modeled limit</strong>
+                <p id="safetyDetail">Illustrative range −22.2°C to −19.0°C · 1.0°C from nearest limit</p>
               </div>
             </div>
 
-            <dl class="metric-grid">
-              <div>
-                <dt>Qualified capacity</dt>
-                <dd><span id="metricCapacity">184</span><small>kW</small></dd>
-              </div>
-              <div>
-                <dt>Load shifted</dt>
-                <dd><span id="metricShifted">552</span><small>kWh</small></dd>
-              </div>
-              <div>
-                <dt>Safe duration</dt>
-                <dd><span id="metricDuration">3.0</span><small>hours</small></dd>
-              </div>
-              <div>
-                <dt>Rebound ratio</dt>
-                <dd><span id="metricRebound">1.08</span><small>×</small></dd>
-              </div>
+            <p class="metric-context" id="metricContext">MODELED SCENARIO</p>
+            <dl class="result-metrics">
+              <div><dt>Modeled peak reduction</dt><dd><span id="metricCapacity">171</span><small>kW</small></dd></div>
+              <div><dt>Peak-period reduction</dt><dd><span id="metricShifted">505</span><small>kWh</small></dd></div>
+              <div><dt>Event length</dt><dd><span id="metricDuration">3.0</span><small>hours</small></dd></div>
+              <div><dt>Rebound energy</dt><dd><span id="metricRebound">136</span><small>kWh</small></dd></div>
             </dl>
 
-            <p class="model-note">
-              Illustrative deterministic model—not field capacity, energy savings or a dispatch commitment.
-              Actual qualification requires site calibration, controls review and independent M&amp;V.
+            <p class="result-note">
+              Peak-period and rebound energy are shown separately. These modeled values are not energy
+              savings, market capacity or a field result. Site calibration and qualified operator review
+              are required before any dispatch.
             </p>
           </div>
         </div>
       </section>
 
-      <section class="proof-system section-wrap" id="how-it-works" aria-labelledby="proof-title">
-        <div class="section-intro">
-          <p class="eyebrow"><span>03</span> The missing proof layer</p>
-          <h2 id="proof-title">From thermal inertia to a flexibility contract.</h2>
-          <p>
-            Generic demand-response platforms see a controllable load. Refrigeration controllers
-            see a temperature setpoint. GEONOS translates between them—and refuses a dispatch when
-            the operating evidence cannot support it.
-          </p>
-        </div>
-
-        <div class="system-flow" aria-label="Four-stage GEONOS workflow">
-          <article>
-            <span class="step-index">01 / READ</span>
-            <div class="step-symbol" aria-hidden="true">
-              <svg viewBox="0 0 64 64"><path d="M8 45V19m12 26V29m12 16V12m12 33V23m12 22V17"/><path d="M5 50h54"/></svg>
-            </div>
-            <h3>Read the room</h3>
-            <p>Power, room temperature, door events, throughput, compressor state and weather.</p>
-            <small>Existing telemetry · no new battery required</small>
-          </article>
-          <article>
-            <span class="step-index">02 / LEARN</span>
-            <div class="step-symbol" aria-hidden="true">
-              <svg viewBox="0 0 64 64"><path d="M12 48c8-1 10-22 20-22s12 20 20 20"/><path d="M12 17h40M12 54h40"/><circle cx="32" cy="26" r="3"/></svg>
-            </div>
-            <h3>Map the envelope</h3>
-            <p>Estimate safe kW, duration and rebound under the actual heat and operating state.</p>
-            <small>Facility-specific · uncertainty visible</small>
-          </article>
-          <article>
-            <span class="step-index">03 / GATE</span>
-            <div class="step-symbol" aria-hidden="true">
-              <svg viewBox="0 0 64 64"><path d="M32 7 52 15v15c0 13-8 22-20 27C20 52 12 43 12 30V15Z"/><path d="m22 31 7 7 14-16"/></svg>
-            </div>
-            <h3>Protect the product</h3>
-            <p>Check temperature, operations and operator rules before any plan can advance.</p>
-            <small>Hard safety gate · human approval</small>
-          </article>
-          <article>
-            <span class="step-index">04 / PROVE</span>
-            <div class="step-symbol" aria-hidden="true">
-              <svg viewBox="0 0 64 64"><path d="M16 7h24l9 9v41H16Z"/><path d="M40 7v10h9M23 29h19M23 37h19M23 45h11"/></svg>
-            </div>
-            <h3>Verify the event</h3>
-            <p>Compare the locked baseline with dispatch performance and temperature compliance.</p>
-            <small>Source-linked M&amp;V · ready for settlement</small>
-          </article>
-        </div>
-
-        <div class="claim-ladder">
-          <div class="claim-copy">
-            <span class="mono-label">CLAIM CONTROL</span>
-            <h3>Every number has a state.</h3>
-            <p>
-              A simulated opportunity is not a market commitment. A dispatched event is not a
-              verified result. GEONOS makes that progression explicit.
-            </p>
-          </div>
-          <ol>
-            <li class="active"><span>01</span><b>SCREENED</b><small>Enough data to investigate</small></li>
-            <li><span>02</span><b>CALIBRATED</b><small>Thermal response tested on site</small></li>
-            <li><span>03</span><b>DISPATCHED</b><small>Operator-approved event completed</small></li>
-            <li><span>04</span><b>VERIFIED</b><small>Independent baseline and safety review</small></li>
-          </ol>
-        </div>
-      </section>
-
-      <section class="climate-evidence section-wrap" id="evidence" aria-labelledby="climate-title">
-        <div class="climate-copy">
-          <p class="eyebrow"><span>04</span> Why climate belongs in dispatch</p>
-          <h2 id="climate-title">The safe envelope changes as the day gets hotter.</h2>
-          <p>
-            A fixed flexibility promise is fragile. GEONOS conditions each plan on heat stress,
-            operating load and product limits, so a facility can offer less capacity on the days
-            when its thermal margin is already thin.
-          </p>
-          <div class="climate-stats">
-            <div><strong>+1.29°C</strong><span>mean temperature</span><small>1991–2000 vs. 2016–2025</small></div>
-            <div><strong>+15.4%</strong><span>cooling degree days</span><small>CDD18, same periods</small></div>
-          </div>
-          <p class="source-note">
-            Derived from NASA POWER daily MERRA-2 values for the 0.5° × 0.625° grid cell near
-            Antalya (36.89°N, 30.70°E). This is a public reanalysis screen, not a station record or
-            facility measurement.
-          </p>
-        </div>
-
-        <div class="climate-chart-card">
-          <div class="card-toolbar">
-            <div>
-              <span class="mono-label">ANTALYA · 1991–2025</span>
-              <h3>Cooling pressure is moving up</h3>
-            </div>
-            <div class="chart-chip">PUBLIC CLIMATE</div>
-          </div>
-          <svg id="climateTrendChart" viewBox="0 0 760 360" role="img" aria-labelledby="trendTitle trendDesc">
-            <title id="trendTitle">Annual cooling degree days near Antalya from 1991 to 2025</title>
-            <desc id="trendDesc">Bars show annual cooling degree days above 18 degrees Celsius, with the highest values occurring near the end of the series.</desc>
-            <g id="climateGrid"></g>
-            <g id="climateBars"></g>
-            <g id="climateLabels"></g>
-          </svg>
-          <div class="trend-caption">
-            <span><i></i> Annual CDD18</span>
-            <span>2024: 1,587 degree-days</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="market-layer section-wrap" id="market" aria-labelledby="market-title">
-        <div class="section-intro split-intro">
+      <section class="view method-view" id="method" data-view="method" aria-labelledby="method-title" hidden>
+        <div class="view-heading compact-heading">
           <div>
-            <p class="eyebrow"><span>05</span> A narrow, valuable wedge</p>
-            <h2 id="market-title">The safety translator between the cold room and the grid.</h2>
+            <p class="section-label">Proposed field workflow</p>
+            <h1 id="method-title">How a site would prepare and review a peak-load plan.</h1>
           </div>
           <p>
-            We do not replace the refrigeration controller, the operator or the energy-market
-            aggregator. We give all three the same defensible answer: what can move now, what must
-            not move, and what actually happened.
+            In a field pilot, GEONOS would use records the site already has. The operator
+            would set the limits, review the plan and stay in control.
           </p>
         </div>
 
-        <div class="translation-diagram">
-          <article>
-            <span class="diagram-role">FACILITY</span>
-            <h3>Cold-store operator</h3>
-            <p>Protects temperature, product and throughput.</p>
-            <ul><li>BMS / PLC</li><li>Power meter</li><li>Operating events</li></ul>
-          </article>
-          <div class="translation-core">
-            <span>GEONOS</span>
-            <strong>Safety envelope</strong>
-            <small>kW · duration · rebound · confidence</small>
-          </div>
-          <article>
-            <span class="diagram-role">MARKET</span>
-            <h3>Aggregator or utility</h3>
-            <p>Needs reliable capacity and settlement evidence.</p>
-            <ul><li>Event signal</li><li>Dispatch status</li><li>M&amp;V packet</li></ul>
-          </article>
-        </div>
-
-        <div class="comparison-wrap">
-          <table class="comparison-table">
-            <caption>Where GEONOS fits</caption>
-            <thead>
-              <tr><th>Approach</th><th>What it does well</th><th>What GEONOS adds</th></tr>
-            </thead>
-            <tbody>
-              <tr><th>VPP / demand-response platform</th><td>Market access, dispatch and portfolio aggregation</td><td>Cold-chain thermal qualification and product-safety evidence</td></tr>
-              <tr><th>Refrigeration controls / BMS</th><td>Reliable equipment operation and temperature control</td><td>Forward flex capacity, uncertainty and event settlement packet</td></tr>
-              <tr><th>Thermal-storage hardware</th><td>Adds physical storage and resilience</td><td>Finds value in the installed asset before new capex</td></tr>
-              <tr><th>One-off engineering study</th><td>Deep site expertise</td><td>Repeatable monitoring and event-by-event verification</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="business-model section-wrap" aria-labelledby="business-title">
-        <div class="business-heading">
-          <p class="eyebrow"><span>06</span> Commercial path</p>
-          <h2 id="business-title">Start with proof. Earn on performance.</h2>
-        </div>
-        <div class="business-grid">
-          <article class="buyer-card">
-            <span class="mono-label">INITIAL BUYER</span>
-            <h3>Multi-site cold-chain operators</h3>
-            <p>Facilities already paying for peak demand, energy volatility and resilience.</p>
-            <dl>
-              <div><dt>User</dt><dd>Facility energy &amp; operations team</dd></div>
-              <div><dt>Channel</dt><dd>Aggregators, ESCOs and refrigeration partners</dd></div>
-              <div><dt>Beachhead</dt><dd>Cold storage, food processing and supermarkets</dd></div>
-            </dl>
-          </article>
-          <article class="revenue-card">
-            <span class="mono-label">REVENUE MODEL</span>
-            <div class="revenue-row"><b>01</b><span><strong>Flexibility audit</strong><small>Fixed-fee site qualification</small></span></div>
-            <div class="revenue-row"><b>02</b><span><strong>Continuous assurance</strong><small>Annual site software license</small></span></div>
-            <div class="revenue-row"><b>03</b><span><strong>Verified performance</strong><small>Share of grid or bill value where permitted</small></span></div>
-            <p>Pricing remains a hypothesis until a real pilot validates willingness to pay.</p>
-          </article>
-          <article class="scale-card">
-            <span class="mono-label">SCALING LOGIC</span>
-            <h3>One evidence schema, many markets.</h3>
-            <p>
-              The core thermal and verification workflow stays constant. Country packs replace
-              weather, tariff, market, food-safety and emissions rules.
-            </p>
-            <div class="scale-path"><span>Cold storage</span><i>→</i><span>Food processing</span><i>→</i><span>Retail refrigeration</span></div>
-          </article>
-        </div>
-      </section>
-
-      <section class="pilot-section section-wrap" id="pilot" aria-labelledby="pilot-title">
-        <div class="section-intro split-intro">
-          <div>
-            <p class="eyebrow"><span>07</span> What $50,000 unlocks</p>
-            <h2 id="pilot-title">One site. One supervised event. One result we can defend.</h2>
-          </div>
-          <p>
-            The prize would move GEONOS from a deterministic demonstration to field evidence—not
-            fund a bigger dashboard. The pilot advances only when each data, safety and operating
-            gate passes.
-          </p>
-        </div>
-
-        <div class="pilot-grid">
-          <div class="timeline-card">
-            <span class="mono-label">90-DAY FIELD PLAN</span>
-            <ol class="timeline">
-              <li><span>01</span><div><b>Days 0–20 · Connect</b><p>Data rights, equipment boundary, BMS/power connector and food-safety review.</p></div></li>
-              <li><span>02</span><div><b>Days 21–45 · Observe</b><p>Silent-mode modeling, holdout tests and operator review—no equipment control.</p></div></li>
-              <li><span>03</span><div><b>Days 46–70 · Dispatch</b><p>One supervised event with manual override, temperature hard stops and live logging.</p></div></li>
-              <li><span>04</span><div><b>Days 71–90 · Verify</b><p>Independent energy and temperature review, failure log and replication brief.</p></div></li>
-            </ol>
-          </div>
-
-          <div class="funds-card">
-            <span class="mono-label">PRIZE BUDGET · USD</span>
-            <div class="budget-total"><strong>$50k</strong><span>tied to field evidence</span></div>
-            <div class="budget-bars">
-              <div style="--share: 24%"><span>Site data + BMS connector</span><b>$12k</b></div>
-              <div style="--share: 22%"><span>Refrigeration &amp; safety engineering</span><b>$11k</b></div>
-              <div style="--share: 20%"><span>Metering + supervised dispatch</span><b>$10k</b></div>
-              <div style="--share: 20%"><span>Independent M&amp;V</span><b>$10k</b></div>
-              <div style="--share: 10%"><span>Türkiye market pack + legal</span><b>$5k</b></div>
-              <div style="--share: 4%"><span>Contingency</span><b>$2k</b></div>
-            </div>
-            <button class="button button-quiet button-wide" id="downloadBrief" type="button">Download prototype brief <span aria-hidden="true">↓</span></button>
-          </div>
-        </div>
-
-        <div class="success-gates">
-          <div><span>GATE A</span><b>Data fit</b><p>Stable interval data and explainable baseline</p></div>
-          <div><span>GATE B</span><b>Safety fit</b><p>Zero product-temperature limit breaches</p></div>
-          <div><span>GATE C</span><b>Grid fit</b><p>Capacity delivered inside agreed tolerance</p></div>
-          <div><span>GATE D</span><b>Buyer fit</b><p>Paid continuation or documented no-go</p></div>
-        </div>
-      </section>
-
-      <section class="team-section section-wrap" id="team" aria-labelledby="team-title">
-        <div class="team-copy">
-          <p class="eyebrow"><span>08</span> Built for the hard intersection</p>
-          <h2 id="team-title">Climate science, physical systems and commercialization.</h2>
-          <p>
-            GEONOS is an early-stage team. We bring climate and GeoAI depth plus business strategy;
-            the next field milestone deliberately adds refrigeration controls, food-safety and
-            independent M&amp;V partners.
-          </p>
-        </div>
-        <div class="team-grid">
-          <article>
-            <span class="person-index">01</span>
-            <h3>Jangho Lee, Ph.D.</h3>
-            <b>Founder · Climate Science &amp; Product</b>
-            <p>Atmospheric scientist and GeoAI researcher translating climate uncertainty into physical-infrastructure decisions.</p>
-            <div class="person-links"><a href="https://jangholee.com" target="_blank" rel="noreferrer">Profile ↗</a><a href="https://www.linkedin.com/in/jholee92/" target="_blank" rel="noreferrer">LinkedIn ↗</a></div>
-          </article>
-          <article>
-            <span class="person-index">02</span>
-            <h3>Juyeon Kim</h3>
-            <b>Business Strategy &amp; Commercialization</b>
-            <p>NYU Stern MBA focused on market entry, climate-finance positioning and commercial partnerships.</p>
-          </article>
-          <article class="open-role">
-            <span class="person-index">03</span>
-            <h3>Field partners</h3>
-            <b>Refrigeration · Controls · M&amp;V</b>
-            <p>Roles to be contracted for the pilot. GEONOS will not substitute software for qualified site judgment.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="truth-panel section-wrap" aria-labelledby="truth-title">
-        <span class="truth-mark" aria-hidden="true">≠</span>
-        <div>
-          <p class="mono-label">CURRENT STATUS · SEPTEMBER 2026</p>
-          <h2 id="truth-title">A working model, not a field claim.</h2>
-        </div>
-        <p>
-          This site is an interactive deterministic prototype built from public climate context and
-          clearly labeled facility assumptions. GEONOS does not yet control equipment, use customer
-          data, participate in an electricity market, or claim verified flexibility, savings or
-          emissions reductions. That is exactly what the proposed pilot is designed to test.
-        </p>
-      </section>
-
-      <section class="sources-section section-wrap" id="sources" aria-labelledby="sources-title">
-        <div>
-          <p class="eyebrow"><span>09</span> Source trail</p>
-          <h2 id="sources-title">Inspect the evidence.</h2>
-        </div>
-        <ol class="source-list">
-          <li><span>01</span><a href="https://cop31.tr/action-plan/clean-energy" target="_blank" rel="noreferrer"><b>COP31 Clean Energy Transition</b><small>Efficiency and Sustainable Cooling; Grids, Storage and Flexibility ↗</small></a></li>
-          <li><span>02</span><a href="https://www.unep.org/resources/global-cooling-watch-2025" target="_blank" rel="noreferrer"><b>UNEP Global Cooling Watch 2025</b><small>Global cooling demand and emissions context ↗</small></a></li>
-          <li><span>03</span><a href="https://power.larc.nasa.gov/" target="_blank" rel="noreferrer"><b>NASA POWER</b><small>Daily MERRA-2 climate values used for the Antalya screen ↗</small></a></li>
-          <li><span>04</span><a href="https://www.iea.org/reports/electricity-2026/flexibility" target="_blank" rel="noreferrer"><b>IEA Electricity 2026 — Flexibility</b><small>Power-system need for demand-side flexibility ↗</small></a></li>
-          <li><span>05</span><a href="https://evo-world.org/en/products-services-mainmenu-en/protocols/ipmvp" target="_blank" rel="noreferrer"><b>Efficiency Valuation Organization — IPMVP</b><small>Reference framework for measurement and verification ↗</small></a></li>
+        <ol class="process-grid">
+          <li>
+            <span class="step-number">01</span>
+            <p class="step-label">Read the site</p>
+            <h2>Start with existing records.</h2>
+            <p>A pilot would begin with interval power, storage temperature, compressor and defrost status, door activity, schedules and local weather.</p>
+            <small>Missing data would be flagged rather than guessed.</small>
+          </li>
+          <li>
+            <span class="step-number">02</span>
+            <p class="step-label">Set the limits</p>
+            <h2>Define what the plan cannot cross.</h2>
+            <p>The operator would set the temperature range, peak window, recovery rules and equipment constraints.</p>
+            <small>A field plan that crossed a limit would be rejected.</small>
+          </li>
+          <li>
+            <span class="step-number">03</span>
+            <p class="step-label">Test the day</p>
+            <h2>Compare a baseline with a shift.</h2>
+            <p>The prototype tests pre-cooling, a temporary load reduction and the rebound that follows.</p>
+            <small>Outputs are estimates until a field test is completed.</small>
+          </li>
+          <li>
+            <span class="step-number">04</span>
+            <p class="step-label">Check the event</p>
+            <h2>Measure before making a claim.</h2>
+            <p>A pilot would compare planned and actual load, temperature and rebound after an approved test.</p>
+            <small>Uncertainty and exclusions would stay in the report.</small>
+          </li>
         </ol>
+
+        <div class="responsibility-panel">
+          <div class="responsibility-intro">
+            <p class="section-label">Clear boundaries</p>
+            <h2>The operator remains in charge.</h2>
+            <p>The current prototype evaluates example scenarios. A field version would not bypass the site controller or replace qualified refrigeration judgment.</p>
+          </div>
+          <dl class="responsibility-list">
+            <div><dt>Site controls</dt><dd>Run the equipment and enforce local safeguards.</dd></div>
+            <div><dt>GEONOS</dt><dd>Estimates a candidate plan and documents the result.</dd></div>
+            <div><dt>Operator + technician</dt><dd>Approve, change, stop or reject every field test.</dd></div>
+            <div><dt>Energy partner</dt><dd>Handles program rules and settlement if a site later qualifies.</dd></div>
+          </dl>
+        </div>
+
+        <div class="page-actions">
+          <a class="button primary" href="#simulator" data-route="simulator">Try the simulator</a>
+          <a class="text-link" href="#pilot" data-route="pilot">See the pilot plan <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+
+      <section class="view pilot-view" id="pilot" data-view="pilot" aria-labelledby="pilot-title" hidden>
+        <div class="view-heading compact-heading">
+          <div>
+            <p class="section-label">One site · 90 days</p>
+            <h1 id="pilot-title">Test the workflow at one cold store.</h1>
+          </div>
+          <p>
+            The first pilot is deliberately small: understand one facility, prepare one
+            operator-reviewed plan and measure one supervised test before discussing scale.
+          </p>
+        </div>
+
+        <div class="pilot-layout">
+          <ol class="pilot-timeline">
+            <li>
+              <span>Days 1–30</span>
+              <div><h2>Map and baseline</h2><p>Review power, temperature, operating and weather data. Agree on gaps, site limits and the baseline method. No equipment is changed.</p></div>
+            </li>
+            <li>
+              <span>Days 31–60</span>
+              <div><h2>Model and review</h2><p>Test candidate peak windows with the operator and HVAC/R technician. Reject any plan that does not meet the site's rules.</p></div>
+            </li>
+            <li>
+              <span>Days 61–90</span>
+              <div><h2>Test and report</h2><p>If the site approves, run one small, manually supervised event. Report the measured result—or explain why the right answer was no-go.</p></div>
+            </li>
+          </ol>
+
+          <aside class="pilot-card">
+            <div class="pilot-status"><span>Current status</span><strong>Seeking first pilot site</strong></div>
+            <h2>A suitable site has</h2>
+            <ul class="check-list">
+              <li>A cold room or frozen-food facility with an afternoon peak</li>
+              <li>Interval power data and temperature history</li>
+              <li>An operator and HVAC/R contact who can review the plan</li>
+              <li>Authority to approve, stop or cancel any test</li>
+            </ul>
+            <a class="button primary wide" href="mailto:jangho.lee@nyu.edu?subject=GEONOS%20pilot">Discuss a pilot</a>
+          </aside>
+        </div>
+
+        <div class="pilot-bottom">
+          <article>
+            <p class="section-label">What the pilot delivers</p>
+            <ul class="plain-list">
+              <li>A documented baseline and data-gap review</li>
+              <li>One operator-approved peak-load plan</li>
+              <li>A measured result with uncertainty, or a documented no-go</li>
+              <li>A decision on whether a larger trial is justified</li>
+            </ul>
+          </article>
+          <article>
+            <p class="section-label">How we judge it</p>
+            <ul class="plain-list">
+              <li>Site-set temperature limits are maintained</li>
+              <li>Delivered reduction is compared with the plan</li>
+              <li>Rebound size and timing are recorded</li>
+              <li>The operator can understand and repeat the workflow</li>
+            </ul>
+          </article>
+          <article class="budget-card">
+            <p class="section-label">Use of a $50,000 award</p>
+            <dl>
+              <div><dt>Data connection</dt><dd>$12k</dd></div>
+              <div><dt>Refrigeration + safety review</dt><dd>$11k</dd></div>
+              <div><dt>Metering + supervised test</dt><dd>$10k</dd></div>
+              <div><dt>Independent measurement review</dt><dd>$10k</dd></div>
+              <div><dt>Türkiye market + legal</dt><dd>$5k</dd></div>
+              <div><dt>Contingency</dt><dd>$2k</dd></div>
+            </dl>
+          </article>
+        </div>
+
+        <p class="pilot-disclaimer">No pilot partner is signed yet. This is not a control-system installation or a guaranteed savings project.</p>
+      </section>
+
+      <section class="view company-view" id="company" data-view="company" aria-labelledby="company-title" hidden>
+        <div class="view-heading compact-heading">
+          <div>
+            <p class="section-label">About GEONOS</p>
+            <h1 id="company-title">Peak-load planning for cold-storage operations.</h1>
+          </div>
+          <p>
+            Refrigeration load may have some flexibility. Food safety and site reliability
+            come first. GEONOS is being built to help operators test that flexibility before they use it.
+          </p>
+        </div>
+
+        <div class="company-grid">
+          <article class="founder-card">
+            <span class="founder-mark" aria-hidden="true">JL</span>
+            <div>
+              <p class="section-label">Founder</p>
+              <h2>Jangho Lee, Ph.D.</h2>
+              <p>
+                Jangho is an atmospheric scientist and product builder working on GeoAI,
+                climate downscaling and urban climate risk. He built this prototype and leads
+                the climate method, product and pilot design.
+              </p>
+              <div class="profile-links">
+                <a href="https://jangholee.com" target="_blank" rel="noreferrer">Website</a>
+                <a href="https://www.linkedin.com/in/jholee92/" target="_blank" rel="noreferrer">LinkedIn</a>
+                <a href="mailto:jangho.lee@nyu.edu">Email</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="company-status">
+            <p class="section-label">Where we are now</p>
+            <h2>Founder-led in New York.</h2>
+            <p>
+              The current product is a rule-based demonstration shown alongside public weather context
+              and built with stated facility assumptions. It has not used customer data, controlled
+              equipment or completed a field event.
+            </p>
+            <p>
+              The next step is one 90-day pilot with a cold-storage operator and qualified local
+              refrigeration and measurement support.
+            </p>
+          </article>
+        </div>
+
+        <div class="evidence-grid">
+          <article class="climate-card">
+            <div>
+              <p class="section-label">Why Antalya</p>
+              <h2>Hotter conditions make careful planning more useful—and less forgiving.</h2>
+              <p>
+                In the public NASA POWER grid-cell record used for this demo, Antalya's 2016–2025
+                average temperature was 1.29°C above 1991–2000. Cooling degree days were 15.4% higher.
+              </p>
+            </div>
+            <dl>
+              <div><dt>Mean temperature change</dt><dd>+1.29°C</dd></div>
+              <div><dt>CDD18 change</dt><dd>+15.4%</dd></div>
+              <div><dt>Comparison</dt><dd>10 yr vs 10 yr</dd></div>
+            </dl>
+            <small>Regional reanalysis, not a weather station or facility measurement.</small>
+          </article>
+
+          <article class="principles-card">
+            <p class="section-label">Working rules</p>
+            <ul class="principle-list">
+              <li><strong>Safety first.</strong><span>Temperature limits outrank peak reduction.</span></li>
+              <li><strong>Operator approved.</strong><span>Software does not make the field decision.</span></li>
+              <li><strong>Label the evidence.</strong><span>Modeled outputs are not presented as results.</span></li>
+              <li><strong>Show uncertainty.</strong><span>Missing or weak evidence remains visible.</span></li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="source-row" aria-label="Sources and methods">
+          <span>Sources</span>
+          <a href="https://power.larc.nasa.gov/" target="_blank" rel="noreferrer">NASA POWER</a>
+          <a href="https://cop31.tr/action-plan/clean-energy" target="_blank" rel="noreferrer">COP31 Clean Energy</a>
+          <a href="https://www.unep.org/resources/global-cooling-watch-2025" target="_blank" rel="noreferrer">UNEP Global Cooling Watch</a>
+          <a href="https://www.iea.org/reports/the-value-of-demand-flexibility" target="_blank" rel="noreferrer">IEA Demand Flexibility</a>
+          <a href="https://github.com/geonos-ai/geonos-thermal-reserve/blob/main/METHODOLOGY.md" target="_blank" rel="noreferrer">Model notes</a>
+        </div>
       </section>
     </main>
 
-    <footer class="site-footer">
-      <div class="footer-brand">
-        <span>GEONOS</span>
-        <p>Turn climate uncertainty into decisions that can be tested.</p>
-      </div>
-      <div class="footer-contact">
-        <a href="mailto:jangho.lee@nyu.edu">jangho.lee@nyu.edu</a>
-        <span>New York · Türkiye pilot proposed</span>
-      </div>
-      <div class="footer-meta">
-        <span>THERMAL RESERVE · WORKING NAME</span>
-        <span>© 2026 GEONOS</span>
-      </div>
+    <footer class="app-footer">
+      <span>GEONOS · New York</span>
+      <a href="mailto:jangho.lee@nyu.edu">jangho.lee@nyu.edu</a>
+      <span>Prototype · September 2026</span>
     </footer>
   </body>
 </html>

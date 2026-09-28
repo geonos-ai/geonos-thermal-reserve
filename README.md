@@ -1,35 +1,33 @@
-# GEONOS — Thermal Reserve
+# GEONOS
 
-True Zero Global Prize 2026 prototype and application package.
+GEONOS is a prototype planning tool for cold-storage peak-load shifting.
 
-**Core proposition:** A cold room is already a thermal battery. GEONOS proves how much refrigeration load can move, for how long, without crossing the temperature line.
+The public demo lets a user choose a typical peak refrigeration load, product profile, outdoor temperature, event window and requested load reduction. It models a 24-hour baseline, pre-cooling, the peak event and the recovery afterward. A plan is rejected when an illustrative storage-temperature proxy leaves the selected range.
 
-## What is included
+**Public demo:** https://geonos-ai.github.io/geonos-thermal-reserve/
 
-- `site/` — dependency-free, responsive public prototype
-- `site/data/antalya_nasa_power_annual.csv` — annual Antalya climate-screen derivative used in the evidence section
-- `application/TRUE_ZERO_GLOBAL_PRIZE_2026_APPLICATION.md` — full F6S application, video script, recommendation request and submission checklist
-- `METHODOLOGY.md` — model boundaries, intended field M&amp;V and stop conditions
+## Repository contents
+
+- `site/` — dependency-free public prototype
+- `site/data/antalya_nasa_power_annual.csv` — Antalya climate-screen derivative used in the evidence section
+- `application/TRUE_ZERO_GLOBAL_PRIZE_2026_APPLICATION.md` — F6S application draft, video script and submission checklist
+- `METHODOLOGY.md` — model logic, evidence boundaries and proposed field method
 - `DEPLOY.md` — GitHub Pages deployment guide in Korean
-- `.github/workflows/pages.yml` — automatic GitHub Pages deployment
+- `.github/workflows/pages.yml` — GitHub Pages deployment workflow
 
-## Preview locally
+## Run locally
 
 ```bash
-cd /Users/jangholee/Desktop/GitHub/geonos-thermal-reserve
+cd geonos-thermal-reserve
 python3 -m http.server 4173 --directory site
 ```
 
 Open `http://localhost:4173`.
 
-## Current evidence state
+## Current status
 
-The site is an interactive deterministic demonstration built from public climate context and clearly labeled facility assumptions. It does not control equipment, use customer data, participate in an electricity market, or claim field-verified flexibility, savings or emissions reductions.
+This is a rule-based browser demonstration shown alongside public Antalya climate context and labeled facility assumptions. The simulator itself does not read the climate CSV. It has not been calibrated to a real cold room, does not control equipment and does not show customer results, verified energy savings or avoided emissions.
 
-## Data note
+The Antalya values come from NASA POWER daily MERRA-2 data for the grid cell near 36.89°N, 30.70°E. They are regional screening data, not a weather-station record or a facility measurement.
 
-The Antalya values are derived from NASA POWER daily MERRA-2 data for the grid cell near 36.89°N, 30.70°E. They are a public reanalysis screen, not a weather-station record or facility measurement. The annual CSV is included for traceability; the interface simulation uses transparent deterministic assumptions rather than customer data.
-
-## Product naming
-
-`Thermal Reserve` is a working product name. The company name in every submission field is `GEONOS`. Complete a formal trademark search before commercial use.
+The company and public product name used in this application is `GEONOS`.
